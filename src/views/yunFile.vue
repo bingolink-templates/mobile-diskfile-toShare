@@ -140,7 +140,6 @@
               widgetHeight: ret.size.height,
               id: _params.id
             });
-            channel.close();
           });
         }, 100)
       }
