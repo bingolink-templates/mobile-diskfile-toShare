@@ -8,7 +8,7 @@ module.exports = {
     "zh-hk": {
         "FileSharedToMe": "分享给我的文檔",
         "All": "更多",
-        "NoneData": "暫無檔案",
+        "NoneData": "暫無文檔",
         "ErrorLoadData": "加載失敗"
     },
     "en": {

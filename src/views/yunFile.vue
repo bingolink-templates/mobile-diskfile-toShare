@@ -11,8 +11,8 @@
                     <div class="flex" v-if='isShowTM'>
                         <scroller v-if='yunFileToMeArr.length != 0' class="yun-scroller flex-dr" show-scrollbar='false'
                             scroll-direction="horizontal">
-                            <div class="flex-ac file-name" v-for="(item, index) in yunFileToMeArr" :key='index' @click='yunFileUserEvent(item.id)'>
-                                <bui-image :src="item.image" width="52px" height="52px"></bui-image>
+                            <div class="flex-ac file-name" v-if='item.isExitDoc' v-for="(item, index) in yunFileToMeArr" :key='index' @click='yunFileUserEvent(item.id)'>
+                                <bui-image :src="item.image" width="52px" height="52px"  @click='yunFileUserEvent(item.id)'></bui-image>
                                 <div class="flex-jc flex-ac" style="width: 153px">
                                     <text class="f24 c51 fw4 mt17 lines2">{{item.name}}</text>
                                 </div>
@@ -106,8 +106,10 @@
                                 fileObj['name'] = element.name
                                 fileObj['id'] = element.fileId
                                 if (element.type == 'D') {
+                                    fileObj['isExitDoc'] = false
                                     fileObj['image'] = '/image/folder2.png'
                                 } else {
+                                    fileObj['isExitDoc'] = true
                                     fileObj['image'] = this.getFileImages(element.extension)
                                 }
                                 fileArr.push(fileObj)
@@ -144,6 +146,7 @@
             }
         },
         created() {
+            this.$fixViewport();
             linkapi.getLanguage((res) => {
                 this.i18n = this.$window[res]
             })
@@ -180,18 +183,13 @@
     }
 
     .yun-scroller {
-        width: 720px;
+        flex: 1;
         height: 140px;
-    }
-
-    .no-file {
-        height: 166px;
-        width: 750px;
     }
 
     .no-content {
         height: 166px;
-        width: 750px;
+        flex: 1;
     }
 
     .center-height {
