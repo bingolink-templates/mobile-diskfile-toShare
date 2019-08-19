@@ -1,5 +1,5 @@
 <template>
-    <div ref="wrap" class="main">
+    <div ref="wrap">
         <!-- 云盘 -->
         <div class="yun-file">
             <div class="pb35 mt20">
@@ -97,6 +97,7 @@
                             url: params.diskUri + 'openapi//file/share/list',
                             data: objDataTo
                         }).then((res) => {
+                            this.broadcastWidgetHeight()
                             this.isShowTM = true
                             this.isErrorTM = true
                             let fileArr = []
@@ -115,7 +116,6 @@
                                 fileArr.push(fileObj)
                             }
                             this.yunFileToMeArr = fileArr
-                            this.broadcastWidgetHeight()
                         }, (err) => {
                             this.isShowTM = true
                             this.isErrorTM = false
@@ -164,9 +164,6 @@
 
 <style lang="css" src="../css/common.css"></style>
 <style>
-    .main {
-		flex: 1;
-    }
 
     .yun-file {
         background-color: #fff;
